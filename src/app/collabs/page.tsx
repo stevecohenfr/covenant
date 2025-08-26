@@ -5,11 +5,7 @@ import { Prisma } from "@prisma/client"; // <-- importe Prisma pour QueryMode
 
 const PAGE_SIZE = 12;
 
-export default async function CollabsPage({
-                                              searchParams,
-                                          }: {
-    searchParams: { page?: string; q?: string };
-}) {
+export default async function CollabsPage({ searchParams, }: any) {
     await requireAuth(); // retire si totalement public
 
     const page = Math.max(1, Number(searchParams.page ?? "1"));
