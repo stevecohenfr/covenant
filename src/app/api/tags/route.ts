@@ -17,5 +17,5 @@ export async function POST(req: NextRequest) {
         update: { label: label || undefined },
         create: { slug, label },
     });
-    return NextResponse.json({ ok:true, id: t.id, label: t.label });
+    return NextResponse.json({ ok:true, tag: t });
 }
