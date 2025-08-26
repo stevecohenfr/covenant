@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
