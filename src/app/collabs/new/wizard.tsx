@@ -106,7 +106,7 @@ export default function NewCollabWizard({ brands, tags, createAction }: { brands
     async function addTag(){
         const label = newTag.trim();
         if (!label) return;
-        const r = await fetch('/api/tags/suggest', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ label })});
+        const r = await fetch('/api/tags', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ label })});
         const j = await r.json();
         if (j.ok) {
             setAllTags((t)=> [...t, j.tag]);
