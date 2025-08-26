@@ -34,10 +34,10 @@ export const metadata: Metadata = {
         siteName: "Covenant",
         title: TITLE,
         description: DESC,
-        url: "/",
+        url: SITE, // 👈 absolute
         images: [
             {
-                url: "/og.jpg",
+                url: `${SITE}/og.jpg`, // 👈 absolute
                 width: 1200,
                 height: 630,
                 alt: "Covenant — vue du tableau de collabs",
@@ -49,8 +49,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: TITLE,
         description: DESC,
-        images: ["/og.jpg"],
-        // site: "@tonCompte",
+        images: [`${SITE}/og.jpg`], // 👈 absolute
     },
     icons: {
         icon: [
