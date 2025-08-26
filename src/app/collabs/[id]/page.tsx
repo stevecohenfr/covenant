@@ -25,9 +25,9 @@ export default async function CollabDetailPage({ params }: { params: { id: strin
         },
     });
 
-    if (!c || (!c.isPublic && c.userId !== (await (await requireAuth()).user?.id))) {
+    /*if (!c || (!c.isPublic && c.userId !== (await (await requireAuth()).user?.id))) {
         // si tu gardes requireAuth, tu as session en haut; sinon adapte
-    }
+    }*/
     if (!c) return notFound();
 
     const amount = moneyCentsToStr(c.amount ?? null, c.currency ?? "EUR");

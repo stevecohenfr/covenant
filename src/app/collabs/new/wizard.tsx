@@ -11,6 +11,7 @@ import { Command, CommandList, CommandItem, CommandInput, CommandEmpty } from "@
 
 
 type Tag = { id:string; label:string };
+type Brand = { id:string; name:string };
 
 
 type ContactRow = { id:string; email:string|null; phone:string|null; language:string|null; role:string|null };
@@ -63,7 +64,7 @@ const steps = [
 ];
 
 
-export default function NewCollabWizard({ tags, createAction }: { tags: Tag[]; createAction: (data:any)=>Promise<void> }){
+export default function NewCollabWizard({ brands, tags, createAction }: { brands: Brand[]; tags: Tag[]; createAction: (data:any)=>Promise<void> }){
     const [step, setStep] = useState(0);
     const [form, setForm] = useState<any>({
         currency:'EUR', language:'fr', deliverablesItems:[], tagIds:[], publicationLinks:[], brandName:'', category:'',

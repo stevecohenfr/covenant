@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import CollabCard from "@/components/collabs/CollabCard";
-import { requireAuth } from "@/lib/requireAuth"; // si l’accès public est derrière login; sinon retire
+import { requireAuth } from "@/lib/requireAuth";
+import { Prisma } from "@prisma/client"; // <-- importe Prisma pour QueryMode
 
 const PAGE_SIZE = 12;
 
@@ -13,19 +14,23 @@ export default async function CollabsPage({
 
     const page = Math.max(1, Number(searchParams.page ?? "1"));
     const q = (searchParams.q ?? "").trim();
+    const mode = Prisma.QueryMode.insensitive;
 
-    const where = {
+    const where: Prisma.CollabWhereInput = {
         isPublic: true,
         ...(q
             ? {
                 OR: [
-                    { product: { contains: q, mode: "insensitive" } },
-                    { brand: { name: { contains: q, mode: "insensitive" } } },
-                    { comment: { contains: q, mode: "insensitive" } },
+                    { product: { contains: q, mode } },
+                    { comment: { contains: q, mode } },
+                    // relation 1–1 (ou 1–0..1) : utiliser `is`
+                    { brand: { is: { name: { contains: q, mode } } } },
+                    // (optionnel) chercher aussi par tag
+                    // { tags: { some: { tag: { name: { contains: q, mode } } } } },
                 ],
             }
             : {}),
-    } as const;
+    };
 
     const [rows, total] = await Promise.all([
         prisma.collab.findMany({
@@ -83,17 +88,17 @@ export default async function CollabsPage({
     );
 }
 
-function PaginationLink({ page, current, label }: { page: number; current: number; label: string }) {
+function PaginationLink({ page, current, label, q }: { page: number; current: number; label: string; q?: string }) {
     const sp = new URLSearchParams();
     sp.set("page", String(page));
+    if (q) sp.set("q", q);
     return (
         <a
             href={`?${sp.toString()}`}
             className={`px-3 py-1 rounded border text-sm ${
-                page === current
-                    ? "bg-gray-900 text-white border-gray-900"
-                    : "bg-white hover:bg-gray-50"
+                page === current ? "bg-gray-900 text-white border-gray-900" : "bg-white hover:bg-gray-50"
             }`}
+            aria-current={page === current ? "page" : undefined}
         >
             {label}
         </a>

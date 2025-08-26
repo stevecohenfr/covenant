@@ -1,14 +1,12 @@
-// src/app/api/collabs/[id]/publish/route.ts
-import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { NextResponse, NextRequest } from "next/server";
 
 export async function PATCH(
     req: NextRequest,
-    context: { params: Promise<{ id: string }> } // 👈 note: Promise
+    context: { params: Promise<{ id: string }> }
 ) {
-    const { id } = await context.params; // 👈 on attend params
-
     try {
+        const { id } = await context.params;
         const collab = await prisma.collab.update({
             where: { id },
             data: { isPublic: true },
@@ -16,9 +14,6 @@ export async function PATCH(
         return NextResponse.json({ ok: true, collab });
     } catch (e) {
         console.error(e);
-        return NextResponse.json(
-            { ok: false, error: "Unable to publish" },
-            { status: 500 }
-        );
+        return NextResponse.json({ ok: false, error: "Unable to publish" }, { status: 500 });
     }
 }
