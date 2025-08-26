@@ -1,15 +1,17 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+const buildDate = new Date().toISOString();
+
 export async function GET() {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
     // URLs statiques de base
     const staticUrls = [
-        { loc: "/", changefreq: "weekly", priority: 1.0 },
-        { loc: "/collabs", changefreq: "weekly", priority: 0.8 },
-        { loc: "/login", changefreq: "monthly", priority: 0.3 },
-        { loc: "/register", changefreq: "monthly", priority: 0.3 },
+        { loc: "/", changefreq: "weekly", priority: 1.0, lastmod: buildDate },
+        { loc: "/collabs", changefreq: "weekly", priority: 0.8, lastmod: buildDate },
+        { loc: "/login", changefreq: "monthly", priority: 0.3, lastmod: buildDate },
+        { loc: "/register", changefreq: "monthly", priority: 0.3, lastmod: buildDate },
     ];
 
     // Exemple dynamique : collabs publiques (si tu veux les exposer)
