@@ -41,6 +41,7 @@ export const metadata: Metadata = {
                 width: 1200,
                 height: 630,
                 alt: "Covenant — vue du tableau de collabs",
+                type: "image/jpeg",
             },
         ],
         locale: "fr_FR",
