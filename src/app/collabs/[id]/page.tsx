@@ -7,7 +7,7 @@ import { StatusBadge } from "@/components/collabs/StatusBadge";
 import { StatusSelect } from "@/components/collabs/StatusSelect";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 
-export default async function CollabDetailPage({ params }: { params: { id: string } }) {
+export default async function CollabDetailPage({ params }: any) {
     await requireAuth(); // retire si totalement public
 
     const c = await prisma.collab.findUnique({
