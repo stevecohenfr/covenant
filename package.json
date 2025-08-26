@@ -2,9 +2,6 @@
   "name": "covenant",
   "version": "0.1.0",
   "private": true,
-  "pnpm": {
-    "neverBuiltDependencies": []
-  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
