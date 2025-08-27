@@ -49,6 +49,7 @@ const COUNTRIES = [
     { code:'US', label:'États-Unis' },
     { code:'PT', label:'Portugal' },
     { code:'NL', label:'Pays-Bas' },
+    { code:'CZ', label:'République Tchèque' },
 ];
 
 const PAYMENT_TERMS = ["À réception", "Net 15", "Net 30", "Net 45", "Net 60"];
